@@ -53,8 +53,9 @@ const CreateBlog = () => {
         setForm((prev)=>({...prev,[name]:value}))
     }
      const handleSubmit = () => {
+        const currdate=new Date().toISOString();
         const data={
-            ...form,category:form.category.split(",").map((c)=>c.trim())
+            ...form,category:form.category.split(",").map((c)=>c.trim()),date:currdate
         }
     mutate(data);
   };

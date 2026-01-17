@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Button } from './ui/button';
 
 const Hero = () => {
    return (
@@ -15,14 +16,15 @@ const Hero = () => {
           Stay updated with the latest trends in finance, accounting, and career
             growth
         </p>
+        <Link to="/create-blog">
+      <Button>Create Blog</Button>
+      </Link>
         </div>
         
 
         
       </div>
-      <Link to="/create-blog">
-      <button>Create Blog</button>
-      </Link>
+      
       
     </section>
   );

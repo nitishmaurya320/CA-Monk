@@ -2,19 +2,20 @@ import { useEffect, useState } from "react";
 import Hero from "../components/Hero"
 import { useQuery } from "@tanstack/react-query";
 import BlogCard from "@/components/BlogCard";
-import { Skeleton } from "@/components/ui/skeleton"
+
 import { ScrollArea } from "@/components/ui/scroll-area";
 import BlogDetailSkeleton from "@/skeletons/BlogDetailSkeleton";
+import BlogCardSkeleton from "@/skeletons/BlogCardSkeleton";
 
 
 const fetchBlogs=async()=>{
     const res=await fetch("http://localhost:3001/blogs");
-    if (!res.ok) throw new Error("Failed to fetch users");
+    if (!res.ok) throw new Error("Failed to fetch blogs");
     return res.json();
 }
 const fetchBlogsById=async(id:number)=>{
     const res=await fetch(`http://localhost:3001/blogs/${id}`);
-    if (!res.ok) throw new Error("Failed to fetch users");
+    if (!res.ok) throw new Error("Failed to fetch blog");
     return res.json();
 
 }
@@ -26,7 +27,7 @@ const HomePage = () => {
       const {
     data: blogs=[],
     isLoading:isBlogsLoading,
-    // error,
+    error:isBlogsError
   } = useQuery({
     queryKey: ["blogs"],
     queryFn: fetchBlogs,
@@ -36,7 +37,7 @@ const HomePage = () => {
     const {
     data: blog,
     isLoading:isBlogLoading,
-    // error,
+    error:isBlogError
   } = useQuery({
     queryKey: ["blog",blogId],
     queryFn:()=> fetchBlogsById(blogId as number),
@@ -58,11 +59,25 @@ useEffect(() => {
     
     <Hero/>
     {/* left panel */}
+     
     
     <div className="flex w-full  p-10 bg-gray-200">
       
         <div className="w-[40%] h-[1200px] flex flex-col space-y-6 ">
+            
            <h1 className="text-2xl font-bold">Latest Blogs</h1>
+            {isBlogsError && (
+    <p className="text-red-500">
+      {(isBlogsError as Error).message || "Failed to load blogs"}
+    </p>
+  )}
+           {isBlogsLoading && (
+  <div className="space-y-4">
+    {Array.from({ length: 5 }).map((_, i) => (
+      <BlogCardSkeleton key={i} />
+    ))}
+  </div>
+)}  
           <ScrollArea className="space-y-6">
             
            <div className="space-y-6 h-[1100px]">
@@ -78,7 +93,13 @@ useEffect(() => {
         </div>
          
             {/* right panel */}
+          
         <div className="w-full rounded-t-4xl bg-white ">
+              {isBlogError && (
+    <div className="p-10 text-red-500">
+      {(isBlogError as Error).message || "Failed to load blog"}
+    </div>
+  )}
       {isBlogLoading?<BlogDetailSkeleton/>:(
         <div>
         <div className="overflow-hidden rounded-t-4xl h-[500px]">

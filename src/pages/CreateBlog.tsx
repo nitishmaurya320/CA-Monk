@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { toast } from "sonner";
 
 
 const createBlog=async(data:any)=>{
@@ -37,8 +38,9 @@ const CreateBlog = () => {
       const { mutate, isPending, isError } = useMutation({
     mutationFn: createBlog,
     onSuccess: () => {
-      // 🔥 THIS IS THE IMPORTANT PART
+      
       queryClient.invalidateQueries({ queryKey: ["blogs"] });
+       toast.success("Blog created successfully");
       setForm({
         title: "",
         category:"",
@@ -46,7 +48,11 @@ const CreateBlog = () => {
         coverImage: "",
         content: "",
       });
+      
     },
+    onError: (error: any) => {
+    toast.error(error?.message || "Failed to create blog");
+  },
   });
     const handleChange=(e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{
         const {name,value}=e.target
@@ -54,6 +60,7 @@ const CreateBlog = () => {
         setForm((prev)=>({...prev,[name]:value}))
     }
      const handleSubmit = () => {
+         if (!form.title || !form.content) return;
         const currdate=new Date().toISOString();
         const data={
             ...form,category:form.category.split(",").map((c)=>c.trim()),date:currdate
@@ -127,8 +134,8 @@ const CreateBlog = () => {
     />
   </div>
 
-      <Button onClick={handleSubmit} className="w-full">
-        Create Blog
+      <Button onClick={handleSubmit} className="w-full" disabled={isPending}>
+         {isPending ? "Creating Blog..." : "Create Blog"}
       </Button>
     </div>
   )

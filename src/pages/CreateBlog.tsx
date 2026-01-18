@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -35,7 +35,7 @@ const CreateBlog = () => {
         content:""
     })
     const queryClient = useQueryClient();
-      const { mutate, isPending, isError } = useMutation({
+      const { mutate, isPending } = useMutation({
     mutationFn: createBlog,
     onSuccess: () => {
       
@@ -72,7 +72,7 @@ const CreateBlog = () => {
      <div className="max-w-2xl mx-auto space-y-6 p-6 bg-white rounded-lg">
       <h1 className="text-2xl font-bold">Create New Blog</h1>
 
-      {/* Title */}
+     
       
         <div className="space-y-2">
     <Label htmlFor="title">Title</Label>
@@ -85,7 +85,7 @@ const CreateBlog = () => {
     />
   </div>
 
-  {/* Category */}
+  
   <div className="space-y-2">
     <Label htmlFor="category">Category</Label>
     <Input
@@ -97,7 +97,7 @@ const CreateBlog = () => {
     />
   </div>
 
-  {/* Description */}
+  
   <div className="space-y-2">
     <Label htmlFor="description">Description</Label>
     <Textarea
@@ -109,7 +109,7 @@ const CreateBlog = () => {
     />
   </div>
 
-  {/* Cover Image */}
+  
   <div className="space-y-2">
     <Label htmlFor="coverImage">Cover Image URL</Label>
     <Input
@@ -121,7 +121,7 @@ const CreateBlog = () => {
     />
   </div>
 
-  {/* Content */}
+ 
   <div className="space-y-2">
     <Label htmlFor="content">Content</Label>
     <Textarea

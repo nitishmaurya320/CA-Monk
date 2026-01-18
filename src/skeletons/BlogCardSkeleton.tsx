@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const BlogCardSkeleton = () => {
   return (
-    <div className="bg-white rounded-xl p-5 mr-9 shadow-sm space-y-3">
+    <div className="bg-white rounded-xl p-5 md:mr-3 shadow-sm space-y-3">
 
      
       <div className="flex justify-between items-center">

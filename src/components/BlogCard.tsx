@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {
   Card,
   CardDescription,
@@ -52,7 +53,7 @@ const BlogCard = ({blog,onClick}:any) => {
       <CardHeader>
          <div className="flex justify-between text-sm">
       <span className="text-red-400 font-medium">
-        {blog.category}
+        {blog.category.join(", ")}
       </span>
       <span className="text-gray-400">
         {timeAgo(blog.date)}

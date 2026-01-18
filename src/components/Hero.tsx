@@ -9,7 +9,7 @@ const Hero = () => {
         <div className='flex-col items-center flex'>
             <h1 className="text-4xl font-semibold leading-tight text-gray-900">
           CA Monk Blog
-          Get interview-ready faster.
+          
         </h1>
 
         <p className="mt-4 text-lg text-gray-600">
@@ -17,7 +17,7 @@ const Hero = () => {
             growth
         </p>
         <Link to="/create-blog">
-      <Button>Create Blog</Button>
+      <Button className='mt-4 cursor-pointer'>Create New Blog</Button>
       </Link>
         </div>
         

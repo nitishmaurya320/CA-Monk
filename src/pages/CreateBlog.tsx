@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
@@ -65,45 +66,66 @@ const CreateBlog = () => {
       <h1 className="text-2xl font-bold">Create New Blog</h1>
 
       {/* Title */}
-      <Input
-        name="title"
-        placeholder="Blog title"
-        value={form.title}
-        onChange={handleChange}
-      />
+      
+        <div className="space-y-2">
+    <Label htmlFor="title">Title</Label>
+    <Input
+      id="title"
+      name="title"
+      placeholder="Blog title"
+      value={form.title}
+      onChange={handleChange}
+    />
+  </div>
 
-      {/* Category */}
-      <Input
-        name="category"
-        placeholder="Category (FINANCE, TECH)"
-        value={form.category}
-        onChange={handleChange}
-      />
+  {/* Category */}
+  <div className="space-y-2">
+    <Label htmlFor="category">Category</Label>
+    <Input
+      id="category"
+      name="category"
+      placeholder="FINANCE, TECH"
+      value={form.category}
+      onChange={handleChange}
+    />
+  </div>
 
-      {/* Description */}
-      <Textarea
-        name="description"
-        placeholder="Short description"
-        value={form.description}
-        onChange={handleChange}
-      />
+  {/* Description */}
+  <div className="space-y-2">
+    <Label htmlFor="description">Description</Label>
+    <Textarea
+      id="description"
+      name="description"
+      placeholder="Short description"
+      value={form.description}
+      onChange={handleChange}
+    />
+  </div>
 
-      {/* Cover Image */}
-      <Input
-        name="coverImage"
-        placeholder="Cover image URL"
-        value={form.coverImage}
-        onChange={handleChange}
-      />
+  {/* Cover Image */}
+  <div className="space-y-2">
+    <Label htmlFor="coverImage">Cover Image URL</Label>
+    <Input
+      id="coverImage"
+      name="coverImage"
+      placeholder="https://..."
+      value={form.coverImage}
+      onChange={handleChange}
+    />
+  </div>
 
-      {/* Content */}
-      <Textarea
-        name="content"
-        placeholder="Full blog content"
-        className="min-h-[150px]"
-        value={form.content}
-        onChange={handleChange}
-      />
+  {/* Content */}
+  <div className="space-y-2">
+    <Label htmlFor="content">Content</Label>
+    <Textarea
+      id="content"
+      name="content"
+      placeholder="Full blog content"
+      className="min-h-[150px]"
+      value={form.content}
+      onChange={handleChange}
+    />
+  </div>
 
       <Button onClick={handleSubmit} className="w-full">
         Create Blog

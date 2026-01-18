@@ -5,9 +5,7 @@ const Navbar = () => {
    return (
     <nav className="flex items-center justify-between px-8 border-2 py-4 border-b border-gray-200 bg-white">
       <div className="flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-md bg-indigo-600 text-white font-semibold text-sm">
-          C
-        </div>
+        
         <span className="font-semibold text-gray-900 tracking-wide">
           CA MONK
         </span>

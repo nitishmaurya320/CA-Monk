@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import Hero from "../components/Hero"
-import Navbar from "../components/Navbar"
 import { useQuery } from "@tanstack/react-query";
 import BlogCard from "@/components/BlogCard";
 import { Skeleton } from "@/components/ui/skeleton"
+import { ScrollArea } from "@/components/ui/scroll-area";
+import BlogDetailSkeleton from "@/skeletons/BlogDetailSkeleton";
 
 
 const fetchBlogs=async()=>{
@@ -56,36 +57,48 @@ useEffect(() => {
     <>
     
     <Hero/>
-    <div className="flex w-full p-10 bg-gray-200">
-        <div className="w-[40%] space-y-6 ">
-            {
+    {/* left panel */}
+    
+    <div className="flex w-full  p-10 bg-gray-200">
+      
+        <div className="w-[40%] h-[1200px] flex flex-col space-y-6 ">
+           <h1 className="text-2xl font-bold">Latest Blogs</h1>
+          <ScrollArea className="space-y-6">
+            
+           <div className="space-y-6 h-[1100px]">
+             {
                 blogs?.map((blog:any)=>{
                     return <BlogCard  onClick={()=>{setBlogId(blog.id)}}  key={blog.id} blog={blog} />
                 })
                 
             }
+           </div>
+          </ScrollArea>
             
         </div>
+         
+            {/* right panel */}
         <div className="w-full rounded-t-4xl bg-white ">
-      {isBlogLoading ? (
-        <Skeleton className="h-[500px] rounded-t-4xl w-full border-2" />
-      ) : (
-        <div className="overflow-hidden rounded-t-4xl border-2 h-[500px]">
+      {isBlogLoading?<BlogDetailSkeleton/>:(
+        <div>
+        <div className="overflow-hidden rounded-t-4xl h-[500px]">
           <img
             className="w-full h-full object-cover"
             src={blog?.coverImage}
             alt="Blog cover"
           />
         </div>
-      )}
+      
         <div className="w-full mx-auto px-10  bg-white mt-6">
           
           
 
           {/* Title */}
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">
             {blog?.title}
           </h1>
+          
+          
 
           {/* Share button */}
           <button className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-md mb-6 hover:bg-indigo-700 transition">
@@ -113,7 +126,7 @@ useEffect(() => {
             month: "short",
             day: "numeric",
             year: "numeric",
-    })}</p>
+            })}</p>
             </div>
           </div>
 
@@ -134,9 +147,11 @@ useEffect(() => {
 
           
         </div>
-
+          </div>)}
     </div>
+    {/* end */}
     </div>
+    
     </>
   )
 }
